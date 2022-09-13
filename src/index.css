@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.UploadSvg,
+.OptimizeSvg,
+.DrawSvg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+.UploadSvg>svg,
+.OptimizeSvg>svg,
+.DrawSvg>svg {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.DrawSvgPoint {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: black;
+    transform: translate(-2.5px, -2.5px);
+}
