@@ -115,8 +115,6 @@ let svgDomRect = null
 const isValidNode = () => {return true}
 
 function optimizeSVG({ optimizeParam, constraints, visible, clear, showOptimizedBlank} ) {
-    console.log('svgUpload:', svgUpload);
-
     if(clear) {
         return (
             <></>
@@ -1357,7 +1355,7 @@ const OptimizeSVG = ({ optimizeParam, constraints, visible, clear, showOptimized
             >
                 <g 
                     transform={
-                        svgUpload.firstElementChild.tagName == 'g' &&
+                        svgUpload.firstElementChild.tagName === 'g' &&
                         svgUpload.firstElementChild.hasAttribute('transform') ?
                         svgUpload.firstElementChild.getAttribute('transform') :
                         'translate(0, 0)'
@@ -1420,35 +1418,49 @@ const OptimizeSVG = ({ optimizeParam, constraints, visible, clear, showOptimized
 }
 
 const DrawSvg = ({constraints, constraintPoints, eventPoints, visible, clear, hideConstraints}) => {
+    console.log(constraintPoints,constraintPoints)
     if(clear) {
         return (
             <></>
         )
-    }
-    
-    return (
-        <div className="DrawSvg" style={!visible || hideConstraints ? {display: 'none'} : {}}>
-            <svg xmlns={svgTagAttr.xmlns} viewBox={svgTagAttr.viewbox} id="svgDraw">
+    } else if (svgUpload) {
+        return (
+            <div className="DrawSvg" style={!visible || hideConstraints ? {display: 'none'} : {}}>
+                <svg xmlns={svgTagAttr.xmlns} viewBox={svgTagAttr.viewbox} id="svgDraw">
+                    <g
+                        transform={
+                            svgUpload.firstElementChild.tagName === 'g' &&
+                            svgUpload.firstElementChild.hasAttribute('transform') ?
+                            svgUpload.firstElementChild.getAttribute('transform') :
+                            'translate(0, 0)'
+                        }
+                        className='viewport'
+                    >
+                        {
+                            constraints?.map((constraint, index) => {
+                                return (
+                                    <polygon key={index} className={'polyline polyline_' + index} opacity="0.3" fill="blue" points={constraint?.points?.toString()}></polygon>
+                                )
+                            })
+                        }
+                        <polygon className="polyline polyline_{index}" opacity="0.3" fill="blue" points={constraintPoints?.toString()}></polygon>
+                    </g>
+                </svg>
+                <div className="DrawSvgPoints">
                 {
-                    constraints?.map((constraint, index) => {
+                    eventPoints?.map((point, index) => {
                         return (
-                            <polygon key={index} className={'polyline polyline_' + index} opacity="0.3" fill="blue" points={constraint?.points?.toString()}></polygon>
+                            <span key={index} className="DrawSvgPoint" style={{left: point.x, top: point.y}}/>
                         )
                     })
                 }
-                <polygon className="polyline polyline_{index}" opacity="0.3" fill="blue" points={constraintPoints?.toString()}></polygon>
-            </svg>
-            <div className="DrawSvgPoints">
-            {
-                eventPoints?.map((point, index) => {
-                    return (
-                        <span key={index} className="DrawSvgPoint" style={{left: point.x, top: point.y}}/>
-                    )
-                })
-            }
+                </div>
             </div>
-        </div>
-    )
+        )
+    } else {
+        <></>
+    }
+    
 }
 
 const UploadSVG = (props) => {
@@ -1608,8 +1620,7 @@ const Canvas = (props) => {
 
         if(svgUpload.firstElementChild.tagName === 'g') {
             if (svgUpload.firstElementChild.getAttribute('transform').search(/scale/)) {
-                console.log('Yes')
-                const transformed = svgUpload
+                const transformed = svgUpload.firstElementChild
                 const pt = svgUpload.createSVGPoint()
 
                 // pass event coordinates
