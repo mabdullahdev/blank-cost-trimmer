@@ -18,17 +18,17 @@ import {
 } from '@mui/material';
 
 // MUI Icons
-import AddCardRoundedIcon from '@mui/icons-material/AddCardRounded';
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
-import OpenWithIcon from '@mui/icons-material/OpenWith';
+import AddCardRoundedIcon from '@mui/icons-material/AddCardRounded'
+import FolderOpenIcon from '@mui/icons-material/FolderOpen'
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
+import OpenWithIcon from '@mui/icons-material/OpenWith'
 import HighlightAltIcon from '@mui/icons-material/HighlightAlt'
-import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
-import CropIcon from '@mui/icons-material/Crop';
-import BrushIcon from '@mui/icons-material/Brush';
-import PanToolIcon from '@mui/icons-material/PanTool';
-import ZoomInIcon from '@mui/icons-material/ZoomIn';
-import ZoomOutIcon from '@mui/icons-material/ZoomOut';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh'
+import CropIcon from '@mui/icons-material/Crop'
+import BrushIcon from '@mui/icons-material/Brush'
+import PanToolIcon from '@mui/icons-material/PanTool'
+import ZoomInIcon from '@mui/icons-material/ZoomIn'
+import ZoomOutIcon from '@mui/icons-material/ZoomOut'
 
 // Colors
 import { deepOrange } from '@mui/material/colors';
