@@ -5,6 +5,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { incrementTabCount } from '../../redux/slices/Tab.Slice'
 import { setMedia } from '../../redux/slices/Media.Slice';
 
+//Components
+import Canvas from '../Canvas/Canvas' 
+
 // MUI Components
 import { 
     Box,
@@ -65,7 +68,7 @@ const Toolbar = () => {
             {
                 id: Math.max(...openedTab) + 1,
                 title: `Canvas ${ Math.max(...openedTab) + 1 }`,
-                panelComponent: (props) => (<p>Panel { Math.max(...openedTab) + 1 }</p>)
+                panelComponent: <Canvas canvasId={ Math.max(...openedTab) + 1 } />
             }
         )
         
